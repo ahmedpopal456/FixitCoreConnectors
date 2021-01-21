@@ -4,7 +4,4 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Fixit.Core.DataContracts" Version="1.0.60" />
-    </ItemGroup>
 </Project>

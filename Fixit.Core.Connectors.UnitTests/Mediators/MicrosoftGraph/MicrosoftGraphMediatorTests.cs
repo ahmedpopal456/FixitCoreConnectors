@@ -9,10 +9,9 @@ using Moq;
 using Microsoft.Graph;
 using System.Collections.Generic;
 using System.Linq;
-
-using OperationStatus = Fixit.Core.DataContracts.OperationStatus;
 using Fixit.Core.Connectors.DataContracts;
-using Fixit.Core.DataContracts.Users.Account;
+using Fixit.Core.Connectors.DataContracts.Users;
+using OperationStatus = Fixit.Core.Connectors.DataContracts.OperationStatus;
 
 namespace Fixit.Core.Connectors.UnitTests.Mediators.MicrosoftGraph
 {

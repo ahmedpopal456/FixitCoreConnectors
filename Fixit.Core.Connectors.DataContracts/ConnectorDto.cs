@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Fixit.Core.DataContracts;
 
 namespace Fixit.Core.Connectors.DataContracts
 {

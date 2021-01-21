@@ -6,10 +6,9 @@ using AutoMapper;
 using Fixit.Core.Connectors.Adapters;
 using Fixit.Core.Connectors.DataContracts;
 using Fixit.Core.Connectors.Mappers;
-using Fixit.Core.DataContracts.Users.Account;
 using Microsoft.Graph;
-// Resolution to:  OperationStatus' is an ambiguous reference between 'Fixit.Core.DataContracts.OperationStatus' and 'Microsoft.Graph.OperationStatus'
-using OperationStatus = Fixit.Core.DataContracts.OperationStatus;
+using OperationStatus = Fixit.Core.Connectors.DataContracts.OperationStatus;
+using Fixit.Core.Connectors.DataContracts.Users;
 
 [assembly: InternalsVisibleTo("Fixit.Core.Connectors.UnitTests")]
 namespace Fixit.Core.Connectors.Mediators.MicrosoftGraph.Internal

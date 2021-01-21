@@ -91,7 +91,7 @@ jobs:
       packageType: 'sdk'
       version: '3.1.102'
   
-  # Restore Fixit.Core.DataContracts
+  # Restore Fixit.Core.Connectors
   - task: DotNetCoreCLI@2
     displayName: Restore
     inputs:

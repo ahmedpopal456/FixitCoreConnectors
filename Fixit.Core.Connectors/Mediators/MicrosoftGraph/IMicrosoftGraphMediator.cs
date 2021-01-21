@@ -1,8 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Fixit.Core.Connectors.DataContracts;
-using Fixit.Core.DataContracts;
-using Fixit.Core.DataContracts.Users.Account;
+using Fixit.Core.Connectors.DataContracts.Users;
 
 namespace Fixit.Core.Connectors.Mediators
 {

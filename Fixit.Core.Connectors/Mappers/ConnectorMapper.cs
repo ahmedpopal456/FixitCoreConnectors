@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Fixit.Core.DataContracts.Users.Account;
-using Fixit.Core.DataContracts.Users.Enums;
+using Fixit.Core.Connectors.DataContracts.Users;
+using Fixit.Core.Connectors.DataContracts.Users.Enums;
 using Microsoft.Graph;
 
 namespace Fixit.Core.Connectors.Mappers

@@ -348,3 +348,4 @@ healthchecksdb
 
 #vim
 .DS_Store
+/Fixit.Core.Connectors.UnitTests/coverage.cobertura.xml

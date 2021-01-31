@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
 
 namespace Fixit.Core.Connectors.Adapters.MicrosoftGraph.Internal
 {
+  [ExcludeFromCodeCoverage]
   internal class GraphServiceClientAdapter : IGraphServiceClientAdapter
   {
     private GraphServiceClient _graphClient;

@@ -101,6 +101,18 @@ jobs:
       includeNuGetOrg: true
       vstsFeed: '08d378fd-be72-4c80-9ce4-1a7c754efb98/4e00d135-54d5-4586-8976-a469a5b325bf'
 
+  # Prepare Sonar Cloud Analysis 
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'fixit-sonarcloud'
+      organization: 'fixit'
+      scannerMode: 'MSBuild'
+      projectKey: 'fixit-app_FixitCoreConnectors
+      projectName: 'FixitCoreConnectors'
+      extraProperties: |
+        sonar.exclusions=**/*.bin
+        sonar.language=cs'  
+  
   # Build
   - task: DotNetCoreCLI@2
     displayName: Build
@@ -129,6 +141,14 @@ jobs:
       codeCoverageTool: 'Cobertura'
       summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
       reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+
+  # Run Sonar Cloud Analysis
+  - task: SonarCloudAnalyze@1
+
+  # Publish Sonar Cloud Report 
+  - task: SonarCloudPublish@1
+    inputs:
+      pollingTimeoutSec: '300'
 
   # Pack
   - task: DotNetCoreCLI@2

@@ -10,6 +10,7 @@ namespace Fixit.Core.Connectors.UnitTests.Adapters
     {
       var firstUser = new User()
       {
+        Id = "someid",
         UserPrincipalName = "something@somewhere.com",
         GivenName = "Jane",
         Surname = "Doe",
@@ -18,6 +19,7 @@ namespace Fixit.Core.Connectors.UnitTests.Adapters
 
       var secondUser = new User()
       {
+        Id = "someid",
         UserPrincipalName = "somethingelse@somewhere.com",
         GivenName = "John",
         Surname = "Smith",

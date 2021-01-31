@@ -39,32 +39,32 @@ namespace Fixit.Core.Connectors.UnitTests.Mediators.MicrosoftGraph
     }
 
     [TestMethod]
-    [DataRow(null, false, DisplayName = "Null_UserPrincipalName")]
-    public async Task UpdateAccountSignInStatusAsync_UserPrincipalNameNullOrWhiteSpace_ThrowsArgumentNullException(string userPrincipalName, bool blockSignIn)
+    [DataRow(null, false, DisplayName = "Null_UserId")]
+    public async Task UpdateAccountSignInStatusAsync_UserIdNullOrWhiteSpace_ThrowsArgumentNullException(string userId, bool blockSignIn)
     {
       // Arrange
       CancellationToken cancellationToken = CancellationToken.None;
 
       // Act
       // Assert
-      await Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _microsoftGraphMediator.UpdateAccountSignInStatusAsync(userPrincipalName, blockSignIn, cancellationToken));
+      await Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _microsoftGraphMediator.UpdateAccountSignInStatusAsync(userId, blockSignIn, cancellationToken));
     }
 
     [TestMethod]
-    [DataRow("something@somewhere.com", false, DisplayName = "Any_UserPrincipalName")]
-    public async Task UpdateAccountSignInStatusAsync_UpdateAccountSignInStatusAsyncSuccess_ReturnsSuccess(string userPrincipalName, bool blockSignIn)
+    [DataRow("something@somewhere.com", false, DisplayName = "Any_UserId")]
+    public async Task UpdateAccountSignInStatusAsync_UpdateAccountSignInStatusAsyncSuccess_ReturnsSuccess(string userId, bool blockSignIn)
     {
       // Arrange
       var fakeUser = _fakeUsers.First();
       CancellationToken cancellationToken = CancellationToken.None;
-      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.UpdateAccountSignInStatusAsync(userPrincipalName, blockSignIn, cancellationToken))
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.UpdateAccountSignInStatusAsync(userId, blockSignIn, cancellationToken))
                            .Returns(Task.CompletedTask);
 
-      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.GetUserAsync(userPrincipalName, cancellationToken))
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.GetUserAsync(userId, cancellationToken))
                            .ReturnsAsync(fakeUser);
 
       // Act
-      ConnectorDto<UserAccountStateDto> actionResult = await _microsoftGraphMediator.UpdateAccountSignInStatusAsync(userPrincipalName, blockSignIn, cancellationToken);
+      ConnectorDto<UserAccountStateDto> actionResult = await _microsoftGraphMediator.UpdateAccountSignInStatusAsync(userId, blockSignIn, cancellationToken);
 
       // Assert
       Assert.IsNotNull(actionResult);
@@ -74,20 +74,20 @@ namespace Fixit.Core.Connectors.UnitTests.Mediators.MicrosoftGraph
     }
 
     [TestMethod]
-    [DataRow("fake@email.com", true, DisplayName = "NonExisting_UserPrincipalName")]
-    public async Task UpdateAccountSignInStatusAsync_UpdateAccountSignInStatusAsyncException_ReturnsOperationExceptio(string userPrincipalName, bool blockSignIn)
+    [DataRow("fake@email.com", true, DisplayName = "NonExisting_UserId")]
+    public async Task UpdateAccountSignInStatusAsync_UpdateAccountSignInStatusAsyncException_ReturnsOperationExceptio(string userId, bool blockSignIn)
     {
       // Arrange
       var fakeUser = _fakeUsers.First();
       CancellationToken cancellationToken = CancellationToken.None;
-      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.UpdateAccountSignInStatusAsync(userPrincipalName, blockSignIn, cancellationToken))
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.UpdateAccountSignInStatusAsync(userId, blockSignIn, cancellationToken))
                            .Throws(new Exception());
 
-      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.GetUserAsync(userPrincipalName, cancellationToken))
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.GetUserAsync(userId, cancellationToken))
                            .ReturnsAsync(fakeUser);
 
       // Act
-      ConnectorDto<UserAccountStateDto> actionResult = await _microsoftGraphMediator.UpdateAccountSignInStatusAsync(userPrincipalName, blockSignIn, cancellationToken);
+      ConnectorDto<UserAccountStateDto> actionResult = await _microsoftGraphMediator.UpdateAccountSignInStatusAsync(userId, blockSignIn, cancellationToken);
 
       // Assert
       Assert.IsNotNull(actionResult);
@@ -97,22 +97,22 @@ namespace Fixit.Core.Connectors.UnitTests.Mediators.MicrosoftGraph
     }
 
     [TestMethod]
-    [DataRow("fake@email.com", true, DisplayName = "NonExisting_UserPrincipalName")]
-    public async Task UpdateAccountSignInStatusAsync_GetUserAsyncException_ReturnsOperationExceptio(string userPrincipalName, bool blockSignIn)
+    [DataRow("fake@email.com", true, DisplayName = "NonExisting_UserId")]
+    public async Task UpdateAccountSignInStatusAsync_GetUserAsyncException_ReturnsOperationExceptio(string userId, bool blockSignIn)
     {
       // Arrange
       var fakeUser = _fakeUsers.First();
       CancellationToken cancellationToken = CancellationToken.None;
 
-      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.UpdateAccountSignInStatusAsync(userPrincipalName, blockSignIn, cancellationToken))
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.UpdateAccountSignInStatusAsync(userId, blockSignIn, cancellationToken))
                            .Returns(Task.CompletedTask);
 
-      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.GetUserAsync(userPrincipalName, cancellationToken))
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.GetUserAsync(userId, cancellationToken))
                            .Throws(new Exception());
 
 
       // Act
-      ConnectorDto<UserAccountStateDto> actionResult = await _microsoftGraphMediator.UpdateAccountSignInStatusAsync(userPrincipalName, blockSignIn, cancellationToken);
+      ConnectorDto<UserAccountStateDto> actionResult = await _microsoftGraphMediator.UpdateAccountSignInStatusAsync(userId, blockSignIn, cancellationToken);
 
       // Assert
       Assert.IsNotNull(actionResult);
@@ -122,29 +122,29 @@ namespace Fixit.Core.Connectors.UnitTests.Mediators.MicrosoftGraph
     }
 
     [TestMethod]
-    [DataRow(null, DisplayName = "Any_UserPrincipalName")]
-    public async Task DeleteUserAsync_UserPrincipalNameNullOrWhiteSpace_ThrowsArgumentNullException(string userPrincipalName)
+    [DataRow(null, DisplayName = "Any_UserId")]
+    public async Task DeleteUserAsync_UserIdNullOrWhiteSpace_ThrowsArgumentNullException(string userId)
     {
       // Arrange
       CancellationToken cancellationToken = CancellationToken.None;
 
       // Act
       // Assert
-      await Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _microsoftGraphMediator.DeleteAccountAsync(userPrincipalName, cancellationToken));
+      await Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _microsoftGraphMediator.DeleteAccountAsync(userId, cancellationToken));
     }
 
     [TestMethod]
-    [DataRow("something@somewhere.com", DisplayName = "Any_UserPrincipalName")]
-    public async Task DeleteUserAsync_DeleteUserAsyncSuccess_ReturnsSuccess(string userPrincipalName)
+    [DataRow("something@somewhere.com", DisplayName = "Any_UserId")]
+    public async Task DeleteUserAsync_DeleteUserAsyncSuccess_ReturnsSuccess(string userId)
     {
       // Arrange
       var fakeUser = _fakeUsers.First();
       CancellationToken cancellationToken = CancellationToken.None;
-      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.DeleteUserAsync(userPrincipalName, cancellationToken))
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.DeleteUserAsync(userId, cancellationToken))
                            .Returns(Task.CompletedTask);
 
       // Act
-      OperationStatus actionResult = await _microsoftGraphMediator.DeleteAccountAsync(userPrincipalName, cancellationToken);
+      OperationStatus actionResult = await _microsoftGraphMediator.DeleteAccountAsync(userId, cancellationToken);
 
       // Assert
       Assert.IsNotNull(actionResult);
@@ -153,17 +153,77 @@ namespace Fixit.Core.Connectors.UnitTests.Mediators.MicrosoftGraph
     }
 
     [TestMethod]
-    [DataRow("fake@email.com", DisplayName = "NonExisting_UserPrincipalName")]
-    public async Task DeleteUserAsync_DeleteUserAsyncException_ReturnsOperationException(string userPrincipalName)
+    [DataRow("fake@email.com", DisplayName = "NonExisting_UserId")]
+    public async Task DeleteUserAsync_DeleteUserAsyncException_ReturnsOperationException(string userId)
     {
       // Arrange
       var fakeUser = _fakeUsers.First();
       CancellationToken cancellationToken = CancellationToken.None;
-      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.DeleteUserAsync(userPrincipalName, cancellationToken))
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.DeleteUserAsync(userId, cancellationToken))
                            .Returns(Task.FromException(new Exception()));
 
       // Act
-      OperationStatus actionResult = await _microsoftGraphMediator.DeleteAccountAsync(userPrincipalName, cancellationToken);
+      OperationStatus actionResult = await _microsoftGraphMediator.DeleteAccountAsync(userId, cancellationToken);
+
+      // Assert
+      Assert.IsNotNull(actionResult);
+      Assert.IsNotNull(actionResult.OperationException);
+      Assert.IsFalse(actionResult.IsOperationSuccessful);
+    }
+
+    [TestMethod]
+    [DataRow(null, "Fakepwd4291", DisplayName = "Any_UserIdAndNewPassword")]
+    public async Task UpdateAccountPasswordAsync_UserIdNullOrWhiteSpace_ThrowsArgumentNullException(string userId, string newPassword)
+    {
+      // Arrange
+      CancellationToken cancellationToken = CancellationToken.None;
+
+      // Act
+      // Assert
+      await Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _microsoftGraphMediator.UpdateAccountPasswordAsync(userId, newPassword, cancellationToken));
+    }
+
+    [TestMethod]
+    [DataRow("fake@email.com", null, DisplayName = "Any_UserIdAndNewPassword")]
+    public async Task UpdateAccountPasswordAsync_NewPasswordNullOrWhiteSpace_ThrowsArgumentNullException(string userId, string newPassword)
+    {
+      // Arrange
+      CancellationToken cancellationToken = CancellationToken.None;
+
+      // Act
+      // Assert
+      await Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _microsoftGraphMediator.UpdateAccountPasswordAsync(userId, newPassword, cancellationToken));
+    }
+
+    [TestMethod]
+    [DataRow("fake@email.com", "Fakepwd4291", DisplayName = "Any_UserIdAndNewPassword")]
+    public async Task UpdateAccountPasswordAsync_UpdateAccountPasswordAsyncSuccess_ReturnsSuccess(string userId, string newPassword)
+    {
+      // Arrange
+      CancellationToken cancellationToken = CancellationToken.None;
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.UpdateUserPasswordAsync(userId, newPassword, cancellationToken))
+                           .Returns(Task.CompletedTask);
+
+      // Act
+      OperationStatus actionResult = await _microsoftGraphMediator.UpdateAccountPasswordAsync(userId, newPassword, cancellationToken);
+
+      // Assert
+      Assert.IsNotNull(actionResult);
+      Assert.IsNull(actionResult.OperationException);
+      Assert.IsTrue(actionResult.IsOperationSuccessful);
+    }
+
+    [TestMethod]
+    [DataRow("fake@email.com", "Fakepwd4291", DisplayName = "Any_UserIdAndNewPassword")]
+    public async Task UpdateAccountPasswordAsync_UpdateAccountPasswordAsyncException_ReturnsOperationException(string userId, string newPassword)
+    {
+      // Arrange
+      CancellationToken cancellationToken = CancellationToken.None;
+      _graphServiceClientAdapter.Setup(graphServiceClientAdapter => graphServiceClientAdapter.UpdateUserPasswordAsync(userId, newPassword, cancellationToken))
+                           .Returns(Task.FromException(new Exception()));
+
+      // Act
+      OperationStatus actionResult = await _microsoftGraphMediator.UpdateAccountPasswordAsync(userId, newPassword, cancellationToken);
 
       // Assert
       Assert.IsNotNull(actionResult);
@@ -180,7 +240,6 @@ namespace Fixit.Core.Connectors.UnitTests.Mediators.MicrosoftGraph
       // Clean-up data objects
       _fakeUsers = null;
     }
-
   }
 
 }

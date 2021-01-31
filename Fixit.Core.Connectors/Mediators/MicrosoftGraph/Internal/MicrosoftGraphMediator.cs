@@ -25,19 +25,19 @@ namespace Fixit.Core.Connectors.Mediators.MicrosoftGraph.Internal
       _mapper = BaseMapper.getMapper();
     }
 
-    public async Task<OperationStatus> DeleteAccountAsync(string userPrincipalName, CancellationToken cancellationToken)
+    public async Task<OperationStatus> DeleteAccountAsync(string userId, CancellationToken cancellationToken)
     {
       cancellationToken.ThrowIfCancellationRequested();
       OperationStatus resultStatus = new OperationStatus();
 
-      if (string.IsNullOrWhiteSpace(userPrincipalName))
+      if (string.IsNullOrWhiteSpace(userId))
       {
-        throw new ArgumentNullException($"{nameof(MicrosoftGraphMediator)} expects a value for {nameof(userPrincipalName)}... null argument was provided");
+        throw new ArgumentNullException($"{nameof(MicrosoftGraphMediator)} expects a value for {nameof(userId)}... null argument was provided");
       }
 
       try
       {
-        await _graphServiceClientAdapter.DeleteUserAsync(userPrincipalName, cancellationToken);
+        await _graphServiceClientAdapter.DeleteUserAsync(userId, cancellationToken);
         resultStatus.IsOperationSuccessful = true;
       }
       catch (Exception exception)
@@ -50,20 +50,20 @@ namespace Fixit.Core.Connectors.Mediators.MicrosoftGraph.Internal
       return resultStatus;
     }
 
-    public async Task<ConnectorDto<UserAccountStateDto>> UpdateAccountSignInStatusAsync(string userPrincipalName, bool blockSignin, CancellationToken cancellationToken)
+    public async Task<ConnectorDto<UserAccountStateDto>> UpdateAccountSignInStatusAsync(string userId, bool blockSignin, CancellationToken cancellationToken)
     {
       cancellationToken.ThrowIfCancellationRequested();
       ConnectorDto<UserAccountStateDto> result = new ConnectorDto<UserAccountStateDto>() { IsOperationSuccessful = true };
 
-      if (string.IsNullOrWhiteSpace(userPrincipalName))
+      if (string.IsNullOrWhiteSpace(userId))
       {
-        throw new ArgumentNullException($"{nameof(MicrosoftGraphMediator)} expects a value for {nameof(userPrincipalName)}... null argument was provided");
+        throw new ArgumentNullException($"{nameof(MicrosoftGraphMediator)} expects a value for {nameof(userId)}... null argument was provided");
       }
 
       try
       {
-        await _graphServiceClientAdapter.UpdateAccountSignInStatusAsync(userPrincipalName, blockSignin, cancellationToken);
-        var user = await _graphServiceClientAdapter.GetUserAsync(userPrincipalName, cancellationToken);
+        await _graphServiceClientAdapter.UpdateAccountSignInStatusAsync(userId, blockSignin, cancellationToken);
+        var user = await _graphServiceClientAdapter.GetUserAsync(userId, cancellationToken);
         result.Result = _mapper.Map<User, UserAccountStateDto>(user);
       }
       catch (Exception exception)
@@ -73,6 +73,38 @@ namespace Fixit.Core.Connectors.Mediators.MicrosoftGraph.Internal
       }
 
       return result;
+    }
+
+
+
+    public async Task<OperationStatus> UpdateAccountPasswordAsync(string userId, string newPassword, CancellationToken cancellationToken)
+    {
+      cancellationToken.ThrowIfCancellationRequested();
+      OperationStatus resultStatus = new OperationStatus();
+
+      if (string.IsNullOrWhiteSpace(userId))
+      {
+        throw new ArgumentNullException($"{nameof(MicrosoftGraphMediator)} expects a value for {nameof(userId)}... null argument was provided");
+      }
+      
+      if (string.IsNullOrWhiteSpace(newPassword))
+      {
+        throw new ArgumentNullException($"{nameof(MicrosoftGraphMediator)} expects a value for {nameof(newPassword)}... null argument was provided");
+      }
+
+      try
+      {
+        await _graphServiceClientAdapter.UpdateUserPasswordAsync(userId, newPassword, cancellationToken);
+        resultStatus.IsOperationSuccessful = true;
+      }
+      catch (Exception exception)
+      {
+
+        resultStatus.OperationException = exception;
+        resultStatus.IsOperationSuccessful = false;
+      }
+
+      return resultStatus;
     }
   }
 }

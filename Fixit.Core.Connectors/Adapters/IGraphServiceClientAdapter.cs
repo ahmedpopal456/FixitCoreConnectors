@@ -9,26 +9,35 @@ namespace Fixit.Core.Connectors.Adapters
     /// <summary>
     ///
     /// </summary>
-    /// <param name="userPrincipalName"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task DeleteUserAsync(string userPrincipalName, CancellationToken cancellationToken);
+    Task DeleteUserAsync(string userId, CancellationToken cancellationToken);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="userPrincipalName"></param>
+    /// <param name="userId"></param>
     /// <param name="blockSignIn"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task UpdateAccountSignInStatusAsync(string userPrincipalName, bool blockSignIn, CancellationToken cancellationToken);
+    Task UpdateAccountSignInStatusAsync(string userId, bool blockSignIn, CancellationToken cancellationToken);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="userPrincipalName"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<User> GetUserAsync(string userPrincipalName, CancellationToken cancellationToken);
+    Task<User> GetUserAsync(string userId, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <param name="newPassword"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task UpdateUserPasswordAsync(string userId, string newPassword, CancellationToken cancellationToken);
   }
 }

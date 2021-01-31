@@ -3,9 +3,10 @@ using Fixit.Core.DataContracts.Users.Account;
 using Fixit.Core.DataContracts.Users.Enums;
 using Microsoft.Graph;
 
+
 namespace Fixit.Core.Connectors.Mappers
 {
-  public class ConnectorMapper : Profile
+  public class ConnectorMapper : AutoMapper.Profile
   {
     public ConnectorMapper()
     {

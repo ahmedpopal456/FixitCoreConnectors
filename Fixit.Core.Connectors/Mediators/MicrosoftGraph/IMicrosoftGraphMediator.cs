@@ -11,18 +11,27 @@ namespace Fixit.Core.Connectors.Mediators
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="userPrincipalName"></param>
+    /// <param name="userId"></param>
     /// <param name="blockSignIn"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<ConnectorDto<UserAccountStateDto>> UpdateAccountSignInStatusAsync(string userPrincipalName, bool blockSignIn, CancellationToken cancellationToken);
+    Task<ConnectorDto<UserAccountStateDto>> UpdateAccountSignInStatusAsync(string userId, bool blockSignIn, CancellationToken cancellationToken);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="userPrincipalName"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<OperationStatus> DeleteAccountAsync(string userPrincipalName, CancellationToken cancellationToken);
+    Task<OperationStatus> DeleteAccountAsync(string userId, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <param name="newPassword"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<OperationStatus> UpdateAccountPasswordAsync(string userId, string newPassword, CancellationToken cancellationToken);
   }
 }

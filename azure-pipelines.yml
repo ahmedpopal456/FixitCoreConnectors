@@ -110,9 +110,10 @@ jobs:
       projectKey: 'fixit-app_FixitCoreConnectors'
       projectName: 'FixitCoreConnectors'
       extraProperties: |
-        sonar.exclusions=**/*.bin
-        sonar.language=cs'  
-  
+        sonar.exclusions=**/obj/**,**/*.dll
+        sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
+        sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
+
   # Build
   - task: DotNetCoreCLI@2
     displayName: Build
@@ -127,7 +128,7 @@ jobs:
       command: 'test'
       testRunTitle: 'Fixit Core Connectors Unit Tests'
       projects: '**/Fixit.Core.Connectors.UnitTests.csproj'
-      arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+      arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=opencover'
       nobuild: true
 
   - script: |
@@ -162,7 +163,6 @@ jobs:
       versioningScheme: 'byEnvVar'
       versionEnvVar: BUILD.BUILDNUMBER
 
-  
   # Publish to Feed
   # allowPackageConflicts allows us to build the same version and not throw an error when trying to push, instead it just ingores the latest package unless the version changes
   # publishVstsFeed is fix-core-connectors Feed

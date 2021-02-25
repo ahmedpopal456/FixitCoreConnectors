@@ -1,20 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Fixit.Core.Connectors.Adapters;
-using Fixit.Core.DataContracts;
 using Fixit.Core.Connectors.UnitTests.Adapters;
+using Fixit.Core.DataContracts.Seeders;
 
 namespace Fixit.Core.Connectors.UnitTests
 {
   public class TestBase
   {
-    public IFakeSeederFactory fakeDtoSeederFactory;
+    protected IFakeSeederFactory _fakeDtoSeederFactory;
 
     protected Mock<IGraphServiceClientAdapter> _graphServiceClientAdapter;
 
     public TestBase()
     {
-      fakeDtoSeederFactory = new FakeDtoSeederFactory();
+      _fakeDtoSeederFactory = new FakeDtoSeederFactory();
     }
 
     [AssemblyInitialize]

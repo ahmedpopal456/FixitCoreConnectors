@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Fixit.Core.Connectors.Adapters;
 using Fixit.Core.Connectors.Mediators;
 using Fixit.Core.Connectors.Mediators.MicrosoftGraph.Internal;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Microsoft.Graph;
-using System.Collections.Generic;
-using System.Linq;
-
-using OperationStatus = Fixit.Core.DataContracts.OperationStatus;
 using Fixit.Core.Connectors.DataContracts;
 using Fixit.Core.DataContracts.Users.Account;
+using Fixit.Core.Connectors.UnitTests.Adapters;
+using Microsoft.Graph;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+
+using OperationStatus = Fixit.Core.DataContracts.OperationStatus;
 
 namespace Fixit.Core.Connectors.UnitTests.Mediators.MicrosoftGraph
 {
@@ -30,12 +31,8 @@ namespace Fixit.Core.Connectors.UnitTests.Mediators.MicrosoftGraph
       _graphServiceClientAdapter = new Mock<IGraphServiceClientAdapter>();
       _microsoftGraphMediator = new MicrosoftGraphMediator(_graphServiceClientAdapter.Object);
 
-      // Create Seeders
-      var fakeUserSeeder = fakeDtoSeederFactory.CreateFakeSeeder<User>();
-
       // Create fake Data objects
-      _fakeUsers = fakeUserSeeder.SeedFakeDtos();
-
+      _fakeUsers = _fakeDtoSeederFactory.CreateSeederFactory(new FakeMSGraphUserSeeder());
     }
 
     [TestMethod]

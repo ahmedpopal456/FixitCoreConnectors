@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
-using Fixit.Core.DataContracts;
+using Fixit.Core.DataContracts.Seeders;
 using Microsoft.Graph;
 
 namespace Fixit.Core.Connectors.UnitTests.Adapters
 {
+  /// <summary>
+  /// A seeder for the <see cref="User"/> model from Microsoft.Graph
+  /// </summary>
   public class FakeMSGraphUserSeeder : IFakeSeederAdapter<User>
   {
     public IList<User> SeedFakeDtos()

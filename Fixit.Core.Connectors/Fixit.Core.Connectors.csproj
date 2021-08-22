@@ -6,6 +6,7 @@
 
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="10.1.1" />
+        <PackageReference Include="GoogleApi" Version="3.10.11" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.10" />
         <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.6" />
         <PackageReference Include="Microsoft.Identity.Client" Version="4.24.0" />

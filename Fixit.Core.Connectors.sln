@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixit.Core.Connectors", "Fixit.Core.Connectors\Fixit.Core.Connectors.csproj", "{50901D4F-8EF0-415E-87F0-5FFECFE8BF9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fixit.Core.Connectors", "Fixit.Core.Connectors\Fixit.Core.Connectors.csproj", "{50901D4F-8EF0-415E-87F0-5FFECFE8BF9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixit.Core.Connectors.DataContracts", "Fixit.Core.Connectors.DataContracts\Fixit.Core.Connectors.DataContracts.csproj", "{DF90BE78-7C46-4221-BD5B-2DD69FE94124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fixit.Core.Connectors.DataContracts", "Fixit.Core.Connectors.DataContracts\Fixit.Core.Connectors.DataContracts.csproj", "{DF90BE78-7C46-4221-BD5B-2DD69FE94124}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixit.Core.Connectors.UnitTests", "Fixit.Core.Connectors.UnitTests\Fixit.Core.Connectors.UnitTests.csproj", "{FD145D84-7232-448A-B977-8B8F6765AE16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fixit.Core.Connectors.UnitTests", "Fixit.Core.Connectors.UnitTests\Fixit.Core.Connectors.UnitTests.csproj", "{FD145D84-7232-448A-B977-8B8F6765AE16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
